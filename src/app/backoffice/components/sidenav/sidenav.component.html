@@ -1,0 +1,16 @@
+@if (isMobile && isMobileOpen) {
+<div class="overlay" (click)="handleCloseMobile()"></div>
+}
+
+<div [ngClass]="isMobile && !isMobileOpen ? 'closed' : 'open'">
+  <div [ngClass]="{ 'collapsed': isCollapse}" class="sidenav">
+    <nav class="content-menu bg-white h-screen">
+      <ul>
+        <li><a routerLink="/backoffice/inventory">Inventario</a></li>
+        <li><a routerLink="/backoffice/orders">Pedidos</a></li>
+      </ul>
+      <button (click)="handleMinimize()">close</button>
+      <button (click)="handleMaximize()">open</button>
+    </nav>
+  </div>
+</div>
