@@ -3,6 +3,13 @@
   "compileOnSave": false,
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
+    "baseUrl": "./",
+    "paths": {
+      "@services/*": ["src/app/core/services/*"],
+      "@interfaces/*": ["src/app/core/interfaces/*"],
+      "@guards/*": ["src/app/core/guards/*"],
+      "@interceptors/*": ["src/app/core/interceptors/*"]
+    },
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,

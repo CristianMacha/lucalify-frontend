@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply text-gray-700 text-sm;
+}
+
+input {
+    @apply border-0 rounded p-2 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-gray-700 outline-none;
+}
+
+.wrapper {
+    @apply scroll-m-20 w-full mx-auto container lg:max-w-4xl md:max-w-2xl;
+}
+
+.btn {
+    @apply bg-white px-3 py-1 rounded-md border-0 ring-1 ring-gray-400 hover:bg-gray-50 focus:ring-2 focus:ring-gray-700 focus:outline-none disabled:bg-gray-400 disabled:text-gray-500;
+
+    &.btn-primary {
+        @apply ring-1 ring-gray-400 bg-gray-800 text-white hover:bg-gray-700 focus:ring-2 focus:ring-gray-700 disabled:bg-gray-300 disabled:text-gray-500;
+    }
+}
