@@ -5,7 +5,9 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { AuthService } from '@services/auth.service';
+import { Store } from '@ngrx/store';
+import { AuthState } from '../state/auth.reducer';
+import { authLogin } from '../state/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,7 @@ import { AuthService } from '@services/auth.service';
   styles: ``,
 })
 export class LoginComponent {
-  private authService = inject(AuthService);
+  private store = inject(Store<AuthState>);
 
   public loginForm = new UntypedFormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -24,13 +26,8 @@ export class LoginComponent {
 
   public onSubmitLogin() {
     const isInvalidForm = this.loginForm.invalid;
-    isInvalidForm ? this.loginForm.markAllAsTouched() : this.login();
-  }
-
-  private login(): void {
-    this.authService.login(this.loginForm.value).subscribe({
-      next: (data: any) => console.log(data),
-      error: (error: any) => console.error(error),
-    });
+    isInvalidForm
+      ? this.loginForm.markAllAsTouched()
+      : this.store.dispatch(authLogin(this.loginForm.value));
   }
 }

@@ -8,11 +8,11 @@
       <form [formGroup]="loginForm" (submit)="onSubmitLogin()" class="mt-5">
         <div class="flex flex-col gap-1 mt-3">
           <label for="email">Email</label>
-          <input type="email" formControlName="email" placeholder="email">
+          <input type="email" id="email" formControlName="email" placeholder="email">
         </div>
         <div class="flex flex-col gap-1 mt-3">
           <label for="password">Password</label>
-          <input type="password" formControlName="password" placeholder="password">
+          <input type="password" id="password" formControlName="password" placeholder="password">
         </div>
         <button type="submit" class="btn btn-primary w-full mt-3" [disabled]="loginForm.invalid">Ingresar</button>
       </form>

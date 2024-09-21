@@ -7,4 +7,8 @@ export const routes: Routes = [
     component: BackofficeOverviewComponent,
     title: 'Backoffice Overview',
   },
+  {
+    path: 'products',
+    loadChildren: () => import('./inventory/inventory.routes').then((r) => r.routes),
+  }
 ];
