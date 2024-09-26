@@ -10,18 +10,21 @@ import { BackofficeService } from './backoffice.service';
   standalone: true,
   imports: [RouterOutlet, SidenavComponent, NgClass],
   template: `
-    <div class="flex flex-row">
+    <div>
       <app-sidenav />
-      <div class="min-h-screen w-full">
-        <div
-          [ngClass]="{
-            'ml-[250px]': !isMobile && !isCollapse,
-            'ml-[80px]': !isMobile && isCollapse,
-            'ml-0': isMobile,
-          }"
-        >
-          <router-outlet />
-          <button (click)="handleOpenMobile()">open</button>
+      <div class="flex-1">
+        <div class="min-h-screen">
+          <div
+            [ngClass]="{
+              'ml-[250px]': !isMobile && !isCollapse,
+              'ml-[80px]': !isMobile && isCollapse,
+              'ml-0': isMobile,
+            }"
+            class="transition-[margin] duration-300"
+          >
+            <router-outlet />
+            <button (click)="handleOpenMobile()">open</button>
+          </div>
         </div>
       </div>
     </div>

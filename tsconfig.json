@@ -8,7 +8,8 @@
       "@services/*": ["src/app/core/services/*"],
       "@interfaces/*": ["src/app/core/interfaces/*"],
       "@guards/*": ["src/app/core/guards/*"],
-      "@interceptors/*": ["src/app/core/interceptors/*"]
+      "@interceptors/*": ["src/app/core/interceptors/*"],
+      "@consts/*": ["src/app/core/consts/*"]
     },
     "forceConsistentCasingInFileNames": true,
     "strict": true,

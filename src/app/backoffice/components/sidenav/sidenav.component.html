@@ -2,15 +2,40 @@
 <div class="overlay" (click)="handleCloseMobile()"></div>
 }
 
-<div [ngClass]="isMobile && !isMobileOpen ? 'closed' : 'open'">
-  <div [ngClass]="{ 'collapsed': isCollapse}" class="sidenav">
-    <nav class="content-menu bg-white h-screen">
-      <ul>
-        <li><a routerLink="/backoffice/inventory">Inventario</a></li>
-        <li><a routerLink="/backoffice/orders">Pedidos</a></li>
+<div [ngClass]="{ 'closed': isMobile && !isMobileOpen }" class="block">
+  <div [ngClass]="{ 'collapsed': isCollapse}" class="sidenav flex flex-col justify-between border-r border-gray-200">
+    <div class="h-[64px] bg-white"></div>
+    <nav class="content-menu bg-white h-screen px-[8px] overflow-y-auto">
+      <ul class="z-10">
+        <li>
+          @for(menu of menus; track menu.id) {
+          <a [routerLink]="[menu.link]" routerLinkActive="active" (click)="isMobileOpen = !isMobileOpen"
+            class="w-full flex items-center menu hover:bg-blue-50 rounded-xl overflow-x-hidden">
+            <a href="/"
+              class="absolute left-[55.8px] menu-item hidden bg-blue-50 shadow-sm h-[40px] pr-4 rounded-r-xl">{{menu.name}}</a>
+            <div class="menu h-[40px] px-5 hover:text-gray-800 rounded-md flex items-center">
+              <img [src]="getIconSrc(menu.icon, menu.link)" height="24" width="24"
+                class="min-w-[24px] min-h-[24px] max-w-[24px] max-h-[24px] inline-block mr-1">
+              <span [ngClass]="{'hidden bg-gray-100 rounded-r-md': isCollapse}">{{menu.name}}</span>
+            </div>
+          </a>
+          }
+        </li>
       </ul>
-      <button (click)="handleMinimize()">close</button>
-      <button (click)="handleMaximize()">open</button>
     </nav>
+    <div class="p-4 flex justify-center">
+      @if (isCollapse) {
+      <button (click)="handleMaximize()" class="hover:bg-gray-50 rounded-xl w-[42px] h-[40px] flex justify-center items-center">
+        <img src="assets/icons/arrow-forward-icon.svg" width="24" height="24" class="min-w-[24px] min-h-[24px]">
+      </button>
+      } @else {
+      <div class="flex flex-row gap-4 justify-between w-full items-center">
+        <div class="flex-1 hover:bg-gray-50 py-2 px-3 rounded-xl">{{(user$ | async)?.name}}</div>
+        <button (click)="handleMinimize()" class="hover:bg-gray-50 rounded-xl w-[42px] h-[40px] flex justify-center items-center">
+          <img src="assets/icons/arrow-back-icon.svg" width="24" height="24">
+        </button>
+      </div>
+      }
+    </div>
   </div>
 </div>

@@ -1,6 +1,8 @@
 import { User } from '@interfaces/user.interface';
-import { Action, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { authSetUser } from './auth.actions';
+
+export const authFeatureKey = 'auth';
 
 export interface AuthState {
   user: User | null;

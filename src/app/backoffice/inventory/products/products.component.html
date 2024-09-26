@@ -1,1 +1,12 @@
-<div>Products ready</div>
+<div class="bg-white rounded-xl border">
+  <div class="p-4 flex justify-between flex-wrap gap-2">
+    <app-filter-product class="w-full md:w-auto" />
+    <div class="w-full md:w-auto">
+      <button (click)="handleOpenModal()" class="btn btn-primary w-full md:w-auto">Agregar Producto</button>
+    </div>
+  </div>
+  <app-table-product />
+  @if(pagination) {
+  <app-pagination [pagination]="pagination" (paginationChange)="handlePaginationChange($event)" />
+  }
+</div>

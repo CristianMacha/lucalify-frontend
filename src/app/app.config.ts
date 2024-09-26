@@ -9,15 +9,27 @@ import {
   withInterceptors,
 } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
-import { _authReducer } from './auth/state/auth.reducer';
+import { _authReducer, authFeatureKey } from './auth/state/auth.reducer';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { tokenInterceptor } from '@interceptors/token.interceptor';
+import {
+  _categoryReducer,
+  categoryFeatureKey,
+} from './backoffice/inventory/categories/state/category.reducer';
+import {
+  _productReducer,
+  productFeatureKey,
+} from './backoffice/inventory/products/state/product.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(withFetch(), withInterceptors([tokenInterceptor])),
-    provideStore({ ['auth']: _authReducer }),
+    provideStore({
+      [authFeatureKey]: _authReducer,
+      [categoryFeatureKey]: _categoryReducer,
+      [productFeatureKey]: _productReducer,
+    }),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode

@@ -20,8 +20,8 @@ export class LoginComponent {
   private store = inject(Store<AuthState>);
 
   public loginForm = new UntypedFormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
+    email: new FormControl('admin@test.com', [Validators.required, Validators.email]),
+    password: new FormControl('admin', [Validators.required]),
   });
 
   public onSubmitLogin() {

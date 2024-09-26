@@ -1,12 +1,13 @@
 import { inject, Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment';
-import { SignIn, SignInResponse } from '@interfaces/auth.interface';
 import { HttpClient } from '@angular/common/http';
-import { catchError, map, Observable, of } from 'rxjs';
-import { User } from '@interfaces/user.interface';
 import { Store } from '@ngrx/store';
+import { catchError, map, Observable, of } from 'rxjs';
+
+import { User } from '@interfaces/user.interface';
+import { SignIn, SignInResponse } from '@interfaces/auth.interface';
 import { AuthState } from '../../auth/state/auth.reducer';
-import { authSetUser } from 'src/app/auth/state/auth.actions';
+import { environment } from '../../../environments/environment';
+import { authSetUser } from '../../auth/state/auth.actions';
 
 @Injectable({
   providedIn: 'root',
