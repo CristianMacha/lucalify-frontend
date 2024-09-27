@@ -1,5 +1,18 @@
-<div class="flex border-b bg-white border-gray-200 px-6">
-  <div class="h-[40px] md:h-[50px] flex items-center">
-    <h1 class="text-xl font-bold">Clientes / Provedores</h1>
+<app-breadcrumbs [title]="'Clientes / Provedores'">
+  <div options>
+    <button class="btn btn-primary">Agregar cliente / provedor</button>
+  </div>
+</app-breadcrumbs>
+<div class="p-4">
+  <div class="wrapper">
+    <div class="flex justify-between flex-wrap gap-2">
+      <app-filter-client class="flex-1" />
+    </div>
+    <div class="bg-white dark:bg-slate-800 rounded-xl border mt-4 dark:border-gray-500">
+      <app-table-client />
+      @if(pagination) {
+        <app-pagination [pagination]="pagination" (paginationChange)="handlePaginationChange($event)" />
+        }
+    </div>
   </div>
 </div>

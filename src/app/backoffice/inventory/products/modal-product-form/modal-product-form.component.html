@@ -1,6 +1,6 @@
 <div class="px-4">
-  <div class="bg-white rounded-xl p-4">
-    <div>
+  <div class="bg-white dark:bg-black border dark:border-gray-700 rounded-xl p-4">
+    <div class="sticky top-0 ">
       <div class="flex flex-row justify-between gap-4 items-start">
         <h1 class="text-xl font-semibold">{{ isEditMode ? 'Actualizar' : 'Crear nuevo' }} producto</h1>
         <div>
@@ -9,18 +9,17 @@
               stroke="currentColor" class="size-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
             </svg>
-
           </button>
         </div>
       </div>
-      <p class="text-gray-500 text-sm">
+      <p class="text-gray-500 dark:text-gray-300 text-sm">
         Complete los detalles del nuevo producto. Haga clic en <strong>{{ isEditMode ? 'Actualizar' : 'Guardar' }}
           producto</strong>
         cuando haya terminado.
       </p>
     </div>
-    <div class="mt-8">
-      <form [formGroup]="productForm" (submit)="handleSaveProduct()" class="flex flex-col gap-4">
+    <div class="my-4 h-[350px] overflow-y-auto">
+      <form [formGroup]="productForm" class="flex flex-col gap-4">
         <div class="gap-2 items-center grid grid-cols-4">
           <label for="name" class="text-left font-medium">Nombre</label>
           <input type="text" id="name" cdkFocusInitial class="w-full col-span-4 md:col-span-3" formControlName="name" />
@@ -51,12 +50,12 @@
           <textarea name="description" id="description" class="w-full col-span-4 md:col-span-3"
             formControlName="description"></textarea>
         </div>
-        <div class="flex justify-end">
-          <button type="submit" class="btn btn-primary w-full md:w-auto">
-            {{ isEditMode ? 'Actualizar' : 'Guardar' }} categoria
-          </button>
-        </div>
       </form>
+    </div>
+    <div class="flex justify-end sticky bottom-0">
+      <button type="button" class="btn btn-primary w-full md:w-auto" (click)="handleSaveProduct()">
+        {{ isEditMode ? 'Actualizar' : 'Guardar' }} categoria
+      </button>
     </div>
   </div>
 </div>

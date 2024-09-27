@@ -40,22 +40,22 @@ import { ModalProductFormComponent } from './modal-product-form/modal-product-fo
     <ng-template #menu>
       <div
         cdkMenu
-        class="bg-white py-2 flex flex-col shadow-xl rounded-xl items-start"
+        class="bg-white dark:bg-black border dark:border-gray-700 py-2 flex flex-col shadow-xl rounded-xl items-start"
       >
         <button
-          class="py-1 px-4 w-full text-left hover:bg-gray-50"
+          class="py-1 px-4 w-full text-left hover:bg-gray-50 dark:hover:bg-gray-800"
           cdkMenuItem
           (click)="handleOpenMenuEdit()"
         >
           Editar
         </button>
-        <button class="py-1 px-4 w-full text-left hover:bg-gray-50" cdkMenuItem>
+        <button class="py-1 px-4 w-full text-left hover:bg-gray-50 dark:hover:bg-gray-800" cdkMenuItem>
           Historial de ventas
         </button>
-        <button class="py-1 px-4 w-full text-left hover:bg-gray-50" cdkMenuItem>
+        <button class="py-1 px-4 w-full text-left hover:bg-gray-50 dark:hover:bg-gray-800" cdkMenuItem>
           Historial de compras
         </button>
-        <button class="py-1 px-4 w-full text-left hover:bg-gray-50" cdkMenuItem>
+        <button class="py-1 px-4 w-full text-left hover:bg-gray-50 dark:hover:bg-gray-800" cdkMenuItem>
           Eliminar
         </button>
       </div>

@@ -32,7 +32,7 @@ import { distinctUntilChanged } from 'rxjs';
           <option [value]="20">20</option>
         </select>
       </div>
-      <div class="flex flex-row gap-2">
+      <div class="flex flex-row gap-2 items-center">
         <div>
           <span class="text-xs font-semibold">Resultado: </span>
           <span class="text-xs font-semibold">{{ from }}</span>

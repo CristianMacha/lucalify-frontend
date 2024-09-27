@@ -22,10 +22,10 @@ import { LowerCasePipe } from '@angular/common';
   imports: [DialogModule, ReactiveFormsModule],
   template: `
     <div class="px-4">
-      <div class="bg-white rounded-xl p-4">
+      <div class="bg-white dark:bg-black border dark:border-gray-700 rounded-xl p-4">
         <div>
           <h1 class="text-xl font-semibold">{{ isEditMode ? 'Actualizar' : 'Crear nueva' }} categoria</h1>
-          <p class="text-gray-500 text-sm">
+          <p class="text-gray-500 dark:text-gray-300 text-sm">
             Complete los detalles de la nueva categoria. Haga clic en
             <strong
               >{{ isEditMode ? 'Actualizar' : 'Guardar' }} categoria</strong

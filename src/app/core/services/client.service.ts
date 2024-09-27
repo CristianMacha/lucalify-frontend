@@ -5,6 +5,7 @@ import {
   Client,
   CreateClient,
   FilterClient,
+  UpdateClient,
 } from '@interfaces/client.interface';
 import { Observable } from 'rxjs';
 import { ResponseList } from '@interfaces/response.interface';
@@ -29,5 +30,9 @@ export class ClientService {
 
   public create(createClient: CreateClient): Observable<Client> {
     return this.http.post<Client>(this.uri, createClient);
+  }
+
+  public update(id: string, updateClient: UpdateClient): Observable<Client> {
+    return this.http.put<Client>(`${this.uri}/${id}`, updateClient);
   }
 }

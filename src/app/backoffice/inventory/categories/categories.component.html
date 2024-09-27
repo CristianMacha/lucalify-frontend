@@ -1,12 +1,16 @@
-<div class="bg-white rounded-xl border">
-  <div class="p-4 flex justify-between flex-wrap gap-2">
-    <app-filter-category class="w-full md:w-auto" />
-    <div class="w-full md:w-auto">
-      <button (click)="handleOpenModal()" class="btn btn-primary w-full md:w-auto">Agregar Categoria</button>
+<div class="p-4">
+  <div class="wrapper">
+    <div class="flex justify-between flex-wrap gap-2">
+      <app-filter-category class="flex-1" />
+      <div class="w-full md:w-auto">
+        <button (click)="handleOpenModal()" class="btn btn-primary w-full md:w-auto">Agregar Categoria</button>
+      </div>
+    </div>
+    <div class="bg-white dark:bg-slate-800 rounded-xl border mt-4 dark:border-gray-500">
+      <app-table-category />
+      @if(pagination) {
+      <app-pagination [pagination]="pagination" (paginationChange)="handlePaginationChange($event)" />
+      }
     </div>
   </div>
-  <app-table-category />
-  @if(pagination) {
-  <app-pagination [pagination]="pagination" (paginationChange)="handlePaginationChange($event)" />
-  }
 </div>

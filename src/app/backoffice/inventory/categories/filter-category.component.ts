@@ -16,7 +16,7 @@ import { loadFilterCategory } from './state/category.actions';
       type="text"
       placeholder="buscar categoria"
       [formControl]="searchCategoryControl"
-      class="w-full md:w-auto"
+      class="w-full"
     />
   `,
 })

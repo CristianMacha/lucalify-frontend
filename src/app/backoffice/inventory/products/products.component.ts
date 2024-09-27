@@ -15,11 +15,18 @@ import { FilterProductComponent } from './filter-product.component';
 import { Dialog } from '@angular/cdk/dialog';
 import { DialogPositionStrategy } from '@services/dialog-position-strategy.service';
 import { ModalProductFormComponent } from './modal-product-form/modal-product-form.component';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [TableProductComponent, PaginationComponent, FilterProductComponent],
+  imports: [
+    TableProductComponent,
+    PaginationComponent,
+    FilterProductComponent,
+    RouterLink,
+    RouterLinkActive,
+  ],
   templateUrl: './products.component.html',
 })
 export class ProductsComponent implements OnInit {

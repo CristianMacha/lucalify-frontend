@@ -8,7 +8,7 @@ import {
   withFetch,
   withInterceptors,
 } from '@angular/common/http';
-import { provideStore } from '@ngrx/store';
+import { provideState, provideStore } from '@ngrx/store';
 import { _authReducer, authFeatureKey } from './auth/state/auth.reducer';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { tokenInterceptor } from '@interceptors/token.interceptor';
@@ -20,23 +20,29 @@ import {
   _productReducer,
   productFeatureKey,
 } from './backoffice/inventory/products/state/product.reducer';
+import { _clientReducer, clientFeatureKey } from './backoffice/clients/state/client.reducer';
+import { provideEffects } from '@ngrx/effects';
+import { ClientEffects } from './backoffice/clients/state/client.effects';
+import { CategoryEffects } from './backoffice/inventory/categories/state/category.effects';
+import { ProductEffects } from './backoffice/inventory/products/state/product.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(withFetch(), withInterceptors([tokenInterceptor])),
-    provideStore({
-      [authFeatureKey]: _authReducer,
-      [categoryFeatureKey]: _categoryReducer,
-      [productFeatureKey]: _productReducer,
-    }),
+    provideStore(),
+    provideState({ name: authFeatureKey, reducer: _authReducer }),
+    provideState({ name: categoryFeatureKey, reducer: _categoryReducer }),
+    provideState({ name: productFeatureKey, reducer: _productReducer }),
+    provideState({ name: clientFeatureKey, reducer: _clientReducer }),
+    provideEffects([ClientEffects, CategoryEffects, ProductEffects]),
     provideStoreDevtools({
-      maxAge: 25, // Retains last 25 states
-      logOnly: !isDevMode(), // Restrict extension to log-only mode
-      autoPause: true, // Pauses recording actions and state changes when the extension window is not open
-      trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
-      traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
-      connectInZone: true, // If set to true, the connection is established within the Angular zone
+      maxAge: 25,
+      logOnly: !isDevMode(),
+      autoPause: true,
+      trace: false,
+      traceLimit: 75,
+      connectInZone: true,
     }),
     {
       provide: HTTP_INTERCEPTORS,

@@ -15,7 +15,7 @@ import {
 import { catchError, exhaustMap, map, of } from 'rxjs';
 
 @Injectable()
-export class ProductEfects {
+export class ProductEffects {
   loadProductsFiltered$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadProductsFiltered),

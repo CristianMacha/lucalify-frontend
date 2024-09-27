@@ -28,3 +28,5 @@ export interface CreateClient {
   phone: string;
   address: string;
 }
+
+export interface UpdateClient extends CreateClient {}

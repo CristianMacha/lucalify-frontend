@@ -1,41 +1,42 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../../app.state';
 import { debounceTime, Subscription } from 'rxjs';
-import { FilterProduct } from '@interfaces/product.interface';
-import { loadFilterProduct } from './state/product.actions';
-import { selectFilterProduct } from './state/product.selector';
+
+import { FilterClient } from '@interfaces/client.interface';
+import { AppState } from '../../app.state';
+import { loadFilteredClients } from './state/client.actions';
+import { selectFilterClient } from './state/client.selectors';
 
 @Component({
-  selector: 'app-filter-product',
+  selector: 'app-filter-client',
   standalone: true,
   imports: [ReactiveFormsModule],
   template: `
     <input
       type="text"
-      placeholder="buscar producto"
-      [formControl]="searchCategoryControl"
+      placeholder="buscar client"
+      [formControl]="searchClientControl"
       class="w-full"
     />
   `,
 })
-export class FilterProductComponent implements OnInit, OnDestroy {
+export class FilterClientComponent implements OnInit, OnDestroy {
   private store = inject(Store<AppState>);
   private subscription = new Subscription();
-  public searchCategoryControl = new FormControl('');
 
-  private filterProduct!: FilterProduct;
+  private filterClient!: FilterClient;
+  public searchClientControl = new FormControl('');
 
   ngOnInit(): void {
     this.subscription.add(
-      this.searchCategoryControl.valueChanges
+      this.searchClientControl.valueChanges
         .pipe(debounceTime(300))
         .subscribe((text) =>
           this.store.dispatch(
-            loadFilterProduct({
+            loadFilteredClients({
               filter: {
-                ...this.filterProduct,
+                ...this.filterClient,
                 textSearch: text || '',
                 page: 1,
               },
@@ -45,11 +46,11 @@ export class FilterProductComponent implements OnInit, OnDestroy {
     );
 
     this.subscription.add(
-      this.store.select(selectFilterProduct).subscribe((filterProduct) => {
-        this.searchCategoryControl.setValue(filterProduct.textSearch, {
+      this.store.select(selectFilterClient).subscribe((filterClient) => {
+        this.searchClientControl.setValue(filterClient.textSearch, {
           emitEvent: false,
         });
-        this.filterProduct = filterProduct;
+        this.filterClient = filterClient;
       })
     );
   }
