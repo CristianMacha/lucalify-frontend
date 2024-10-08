@@ -1,0 +1,9 @@
+<div class="p-4">
+  <div class="wrapper">
+    <div class="bg-white dark:bg-slate-800 rounded-xl border mt-4 dark:border-gray-500">
+      <app-table-sale />
+      @if(pagination) {
+        <app-pagination [pagination]="pagination" (paginationChange)="handlePaginationChange($event)" />
+        }
+  </div>
+</div>

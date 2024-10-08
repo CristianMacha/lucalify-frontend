@@ -7,7 +7,8 @@ import { BreadcrumbsComponent } from '../../shared/breadcrumbs.component';
   standalone: true,
   imports: [RouterOutlet, RouterLink, RouterLinkActive, BreadcrumbsComponent],
   template: `
-    <app-breadcrumbs [title]="'Ventas'"> <router-outlet /> </app-breadcrumbs>
+    <app-breadcrumbs [title]="'Ventas'" />
+    <router-outlet />
   `,
 })
 export class SalesOverviewComponent {}

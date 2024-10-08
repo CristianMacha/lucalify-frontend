@@ -1,4 +1,5 @@
 import { Category } from './category.interface';
+import { ProductSale } from './product-sale.interface';
 
 export interface Product {
   id: string;
@@ -13,7 +14,7 @@ export interface Product {
   createdAt: Date;
   updatedAt: Date;
   category: Category;
-  // variants: ProductVariantEntity[];
+  productSales: ProductSale[];
 }
 
 export interface CreateProduct {
