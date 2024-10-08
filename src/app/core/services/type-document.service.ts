@@ -14,7 +14,7 @@ export class TypeDocumentService {
     this.uri = `${environment.apiUrl}/type-document`;
   }
 
-  public getAll(): Observable<TypeDocument> {
-    return this.http.get<TypeDocument>(`${this.uri}`);
+  public getAll(): Observable<TypeDocument[]> {
+    return this.http.get<TypeDocument[]>(`${this.uri}`);
   }
 }

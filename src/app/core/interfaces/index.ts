@@ -6,3 +6,4 @@ export * from './type-document.interface';
 export * from './client.interface';
 
 export * from './pagination.interface';
+export * from './identity.interface';

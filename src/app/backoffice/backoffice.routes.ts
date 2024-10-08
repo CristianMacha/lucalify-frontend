@@ -24,6 +24,10 @@ export const routes: Routes = [
         component: ClientsComponent,
         title: 'Clientes',
       },
+      {
+        path: 'sales',
+        loadChildren: () => import('./sales/sales.routes').then((r) => r.routes),
+      }
     ],
   },
 ];

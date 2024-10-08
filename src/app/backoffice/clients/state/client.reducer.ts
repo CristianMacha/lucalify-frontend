@@ -12,6 +12,7 @@ import {
   loadFilteredClientsSuccess,
   loadUpdateClient,
   loadUpdateClientFailure,
+  loadUpdateClientSuccess,
 } from './client.actions';
 
 export const clientFeatureKey = 'client';
@@ -83,7 +84,7 @@ export const _clientReducer = createReducer(
     loading: false,
   })),
   on(loadUpdateClient, (state) => ({ ...state, loading: true, error: null })),
-  on(loadCreateClientSuccess, (state, { client }) => {
+  on(loadUpdateClientSuccess, (state, { client }) => {
     const clients = state.filteredClients.map((c) =>
       c.id === client.id ? client : c
     );

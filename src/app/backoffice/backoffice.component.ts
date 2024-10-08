@@ -34,6 +34,7 @@ export class BackofficeComponent {
     { id: 1, name: 'Descripción general', link: '/overview' },
     { id: 2, name: 'Productos', link: '/products' },
     { id: 3, name: 'Clientes', link: '/clients' },
+    { id: 4, name: 'Ventas', link: '/sales' },
   ];
 
   public handleThemeChange(theme: string): void {

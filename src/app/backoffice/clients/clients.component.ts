@@ -2,6 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { BreadcrumbsComponent } from '../../shared/breadcrumbs.component';
 import { TableClientComponent } from './table-client.component';
 import { Store } from '@ngrx/store';
+import { Dialog } from '@angular/cdk/dialog';
+
 import { AppState } from '../../app.state';
 import {
   selectFilterClient,
@@ -13,6 +15,8 @@ import { FilterCategoryComponent } from '../inventory/categories/filter-category
 import { PaginationInterface } from '@interfaces/pagination.interface';
 import { FilterClient } from '@interfaces/client.interface';
 import { PaginationComponent } from '../../shared/pagination.component';
+import { DialogPositionStrategy } from '@services/dialog-position-strategy.service';
+import { ModalClientFormComponent } from './modal-client-form.component';
 
 @Component({
   selector: 'app-clients',
@@ -28,6 +32,8 @@ import { PaginationComponent } from '../../shared/pagination.component';
 })
 export class ClientsComponent implements OnInit {
   private store = inject(Store<AppState>);
+  private dialog = inject(Dialog);
+  private dialogPositionStrategy = inject(DialogPositionStrategy);
 
   private filterClient!: FilterClient;
   public pagination: PaginationInterface | null = null;
@@ -39,6 +45,14 @@ export class ClientsComponent implements OnInit {
 
     this.store.select(selectPaginationClient).subscribe((pagination) => {
       this.pagination = pagination;
+    });
+  }
+
+  public handleOpenModal(): void {
+    this.dialog.open<boolean>(ModalClientFormComponent, {
+      width: '600px',
+      positionStrategy: this.dialogPositionStrategy.centerTop(),
+      disableClose: true,
     });
   }
 

@@ -11,13 +11,13 @@ import {
 } from '@angular/forms';
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { Product } from '@interfaces/product.interface';
-import { JsonPipe, NgFor } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { loadCreateProduct, loadUpdateProduct } from '../state/product.actions';
 
 @Component({
   selector: 'app-modal-product-form',
   standalone: true,
-  imports: [ReactiveFormsModule, NgFor, JsonPipe],
+  imports: [ReactiveFormsModule, NgFor],
   templateUrl: './modal-product-form.component.html',
 })
 export class ModalProductFormComponent implements OnInit {

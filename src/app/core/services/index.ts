@@ -5,3 +5,4 @@ export * from './type-document.service';
 export * from './client.service';
 
 export * from './dialog-position-strategy.service';
+export * from './Identity.service';
