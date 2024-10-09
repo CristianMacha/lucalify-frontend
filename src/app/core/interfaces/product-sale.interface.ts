@@ -1,5 +1,5 @@
-import { Product } from "./product.interface";
-import { Sale } from "./sale.interface";
+import { Product } from './product.interface';
+import { Sale } from './sale.interface';
 
 export interface ProductSale {
   id: string;
@@ -11,4 +11,10 @@ export interface ProductSale {
   updatedAt: Date;
   product: Product;
   sale: Sale;
+}
+
+export interface CreateProductSale {
+  productId: string;
+  quantity: number;
+  price: number;
 }

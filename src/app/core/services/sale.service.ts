@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 import { ResponseList } from '@interfaces/response.interface';
-import { FilterSale, Sale } from '@interfaces/sale.interface';
+import { CreateSale, FilterSale, Sale } from '@interfaces/sale.interface';
 
 @Injectable({ providedIn: 'root' })
 export class SaleService {
@@ -21,5 +21,9 @@ export class SaleService {
     return this.http.get<ResponseList<Sale>>(
       `${this.uri}/filter?${query}${queryFromDate}${queryToDate}`
     );
+  }
+
+  public create(createSale: CreateSale): Observable<Sale> {
+    return this.http.post<Sale>(this.uri, createSale);
   }
 }

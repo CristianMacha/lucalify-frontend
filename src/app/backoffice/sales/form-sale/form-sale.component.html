@@ -1,0 +1,12 @@
+<app-breadcrumbs [title]="id">
+  <div options>
+    <a [routerLink]="['/sales']" routerLinkActive="router-link-active" class="btn btn-link">
+      Volver a ventas
+    </a>
+  </div>
+</app-breadcrumbs>
+<div class="p-4">
+  <div class="wrapper flex flex-col gap-4">
+    <app-search-product (productSelected)="productSubimitted($event)" />
+  </div>
+</div>

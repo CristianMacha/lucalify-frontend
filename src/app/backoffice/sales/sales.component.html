@@ -1,3 +1,10 @@
+<app-breadcrumbs [title]="'Ventas'">
+  <div options>
+    <a [routerLink]="['/sales', 'add-edit', 'new']" routerLinkActive="router-link-active"  class="btn btn-primary">
+      Agregar venta
+    </a>
+  </div>
+</app-breadcrumbs>
 <div class="p-4">
   <div class="wrapper">
     <div class="bg-white dark:bg-slate-800 rounded-xl border mt-4 dark:border-gray-500">

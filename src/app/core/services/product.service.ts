@@ -39,4 +39,8 @@ export class ProductService {
   ): Observable<Product> {
     return this.http.put<Product>(`${this.uri}/${productId}`, updateProduct);
   }
+
+  public search(textSearch: string): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.uri}/search?value=${textSearch}`);
+  }
 }

@@ -9,11 +9,19 @@ import { selectFilterSale, selectPaginationSale } from './state/sale.selector';
 import { loadFilteredSale } from './state/sale.actions';
 import { TableSaleComponent } from './table-sale.component';
 import { PaginationComponent } from '../../shared/pagination.component';
+import { BreadcrumbsComponent } from '../../shared/breadcrumbs.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sales-overview',
   standalone: true,
-  imports: [TableSaleComponent, PaginationComponent, NgIf],
+  imports: [
+    TableSaleComponent,
+    PaginationComponent,
+    NgIf,
+    BreadcrumbsComponent,
+    RouterLink,
+  ],
   templateUrl: './sales.component.html',
 })
 export class SalesComponent implements OnInit {

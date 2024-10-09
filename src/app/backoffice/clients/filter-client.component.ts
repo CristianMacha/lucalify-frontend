@@ -15,7 +15,7 @@ import { selectFilterClient } from './state/client.selectors';
   template: `
     <input
       type="text"
-      placeholder="buscar client"
+      placeholder="buscar cliente"
       [formControl]="searchClientControl"
       class="w-full"
     />

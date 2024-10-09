@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { SalesOverviewComponent } from './sales-overview.component';
 import { SalesComponent } from './sales.component';
+import { FormSaleComponent } from './form-sale/form-sale.component';
 
 export const routes: Routes = [
   {
@@ -12,6 +13,11 @@ export const routes: Routes = [
         component: SalesComponent,
         title: 'Ventas',
       },
+      {
+        path: 'add-edit/:id',
+        component: FormSaleComponent,
+        title: 'Formulario de venta',
+      }
     ],
   },
 ];

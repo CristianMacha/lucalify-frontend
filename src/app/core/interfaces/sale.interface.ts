@@ -1,6 +1,6 @@
 import { Client } from './client.interface';
-import { Payment } from './payment.interface';
-import { ProductSale } from './product-sale.interface';
+import { CreatePaymentSale, Payment } from './payment.interface';
+import { CreateProductSale, ProductSale } from './product-sale.interface';
 
 export interface Sale {
   id: string;
@@ -22,4 +22,10 @@ export interface FilterSale {
   perPage: number;
   fromDate?: Date;
   toDate?: Date;
+}
+
+export interface CreateSale {
+  clientId: string;
+  products: CreateProductSale[];
+  payments: CreatePaymentSale[];
 }
