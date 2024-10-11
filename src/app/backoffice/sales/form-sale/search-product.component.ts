@@ -31,7 +31,7 @@ import { Product } from '@interfaces/product.interface';
       >
         @for (product of products; track product.id) {
         <div
-          class="px-4 py-2 hover:bg-gray-100 hover:cursor-pointer flex flex-row gap-4 items-center"
+          class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 hover:cursor-pointer flex flex-row gap-4 items-center"
           (click)="selectProduct(product)"
         >
           <div class="flex-1">{{ product.name }}</div>

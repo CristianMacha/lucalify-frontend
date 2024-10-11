@@ -77,68 +77,68 @@ import { startWith } from 'rxjs';
                 </option>
               </select>
             </div>
-            @if (typeDocumentControl.value !== codeDocuments.DOC_SIN_DOC_IDENTIDAD) {
-              <div class="gap-2 items-center grid grid-cols-4 flex-1">
-                <label
-                  for="documentNumber"
-                  class="text-left font-medium col-span-4 md:col-span-1"
-                  >Número de documento</label
-                >
-                <div class="flex flex-row gap-2 col-span-4 md:col-span-3">
-                  <div class="w-full">
-                    <input
-                      type="text"
-                      id="documentNumber"
-                      class="w-full"
-                      [class.has-error]="
-                        documentNumberControl.invalid &&
-                        (documentNumberControl.dirty ||
-                          documentNumberControl.touched)
-                      "
-                      cdkFocusInitial
-                      formControlName="documentNumber"
-                    />
-                    <div
-                      *ngIf="
-                        documentNumberControl.invalid &&
-                        (documentNumberControl.dirty ||
-                          documentNumberControl.touched)
-                      "
-                    >
-                      <small class="text-red-500">
-                        @switch (typeDocumentControl.value) { @case
-                        (codeDocuments.DOC_RUC) { El RUC debe tener 11 dígitos }
-                        @case (codeDocuments.DOC_NAC_IDENTIDAD) { El DNI debe
-                        tener 8 dígitos }
-                        @default { El número de documento es
-                        necesario } }
-                      </small>
-                    </div>
-                  </div>
-                  @if (typeDocumentControl.value === codeDocuments.DOC_RUC ||
-                  typeDocumentControl.value === codeDocuments.DOC_NAC_IDENTIDAD) {
-                  <button
-                    class="btn btn-primary"
-                    (click)="getClientDataByDocumentNumber()"
+            @if (typeDocumentControl.value !==
+            codeDocuments.DOC_SIN_DOC_IDENTIDAD) {
+            <div class="gap-2 items-center grid grid-cols-4 flex-1">
+              <label
+                for="documentNumber"
+                class="text-left font-medium col-span-4 md:col-span-1"
+                >Número de documento</label
+              >
+              <div class="flex flex-row gap-2 col-span-4 md:col-span-3">
+                <div class="w-full">
+                  <input
+                    type="text"
+                    id="documentNumber"
+                    class="w-full"
+                    [class.has-error]="
+                      documentNumberControl.invalid &&
+                      (documentNumberControl.dirty ||
+                        documentNumberControl.touched)
+                    "
+                    cdkFocusInitial
+                    formControlName="documentNumber"
+                  />
+                  <div
+                    *ngIf="
+                      documentNumberControl.invalid &&
+                      (documentNumberControl.dirty ||
+                        documentNumberControl.touched)
+                    "
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="size-6"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-                      />
-                    </svg>
-                  </button>
-                  }
+                    <small class="text-red-500">
+                      @switch (typeDocumentControl.value) { @case
+                      (codeDocuments.DOC_RUC) { El RUC debe tener 11 dígitos }
+                      @case (codeDocuments.DOC_NAC_IDENTIDAD) { El DNI debe
+                      tener 8 dígitos } @default { El número de documento es
+                      necesario } }
+                    </small>
+                  </div>
                 </div>
+                @if (typeDocumentControl.value === codeDocuments.DOC_RUC ||
+                typeDocumentControl.value === codeDocuments.DOC_NAC_IDENTIDAD) {
+                <button
+                  class="btn btn-primary"
+                  (click)="getClientDataByDocumentNumber()"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="size-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                    />
+                  </svg>
+                </button>
+                }
               </div>
+            </div>
             }
             <div class="gap-2 items-center grid grid-cols-4">
               <label
@@ -249,9 +249,9 @@ export class ModalClientFormComponent implements OnInit {
   ngOnInit(): void {
     this.isEditMode && this.setClientFormValues();
     this.getTypeDocuments();
-    this.typeDocumentControl.valueChanges.pipe(startWith('')).subscribe((value) =>
-      this.validateDocumentNumber(value)
-    );
+    this.typeDocumentControl.valueChanges
+      .pipe(startWith(''))
+      .subscribe((value) => this.validateDocumentNumber(value));
   }
 
   get typeDocumentControl(): FormControl {
@@ -332,7 +332,10 @@ export class ModalClientFormComponent implements OnInit {
 
   private GetByDni(documentNumber: string): void {
     this.identityService.getByDni(documentNumber).subscribe({
-      next: (data) => this.nameControl.setValue(`${data.nombres} ${data.apellidoPaterno} ${data.apellidoMaterno}`),
+      next: (data) =>
+        this.nameControl.setValue(
+          `${data.nombres} ${data.apellidoPaterno} ${data.apellidoMaterno}`
+        ),
     });
   }
 
