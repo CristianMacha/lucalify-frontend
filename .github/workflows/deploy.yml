@@ -4,8 +4,10 @@ on:
   workflow_dispatch:
 
 permissions:
-  id-token: write
   contents: read
+  packages: write
+  attestations: write
+  id-token: write
 
 jobs:
   deploy:
