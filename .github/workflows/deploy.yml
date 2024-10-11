@@ -24,7 +24,7 @@ jobs:
         run: npm install
 
       - name: Verify build output
-        run: ls -la dist/lucalify-app
+        run: ls -la dist/browser/lucalify-app
 
       - name: Build
         run: npm run build -- --prod
