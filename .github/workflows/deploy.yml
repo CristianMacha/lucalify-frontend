@@ -35,6 +35,9 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Log the environment variable
+        run: echo ${{ vars.REGISTRY }}
+
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
@@ -48,7 +51,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ vars.REGISTRY }}/${{ vars.IMAGE_NAME }}:latest
+          tags: ${{ vars.REGISTRY }}/${{ vars.IMAGE_NAME }}
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Generate artifact attestation
