@@ -9,7 +9,7 @@ RUN npm run build --prod
 
 FROM nginx:alpine
 
-COPY --from=build /app/dist/lucalify-app /usr/share/nginx/html
+COPY --from=build /app/dist/lucalify-app/browser /usr/share/nginx/html
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
