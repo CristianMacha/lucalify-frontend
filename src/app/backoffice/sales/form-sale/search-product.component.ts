@@ -36,7 +36,7 @@ import { Product } from '@interfaces/product.interface';
         >
           <div class="flex-1">{{ product.name }}</div>
           <div class="">{{ product.stock }}</div>
-          <div class="">{{ product.price | currency }}</div>
+          <div class="">{{ product.price | currency:'s/ ' }}</div>
         </div>
         }
       </div>

@@ -10,11 +10,15 @@ export interface ProductSale {
   createdAt: Date;
   updatedAt: Date;
   product: Product;
-  sale: Sale;
+  sale?: Sale;
 }
 
 export interface CreateProductSale {
   productId: string;
   quantity: number;
-  price: number;
+}
+
+export interface CreateProductSaleFront {
+  product: Product;
+  quantity: number;
 }

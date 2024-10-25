@@ -19,11 +19,11 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./inventory/inventory.routes').then((r) => r.routes),
       },
-      {
-        path: 'clients',
-        component: ClientsComponent,
-        title: 'Clientes',
-      },
+      // {
+      //   path: 'clients',
+      //   component: ClientsComponent,
+      //   title: 'Clientes',
+      // },
       {
         path: 'sales',
         loadChildren: () => import('./sales/sales.routes').then((r) => r.routes),

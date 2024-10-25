@@ -16,16 +16,16 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
     <div class="table-container">
       <table cdk-table [dataSource]="dataSource" class="w-full">
         <ng-container cdkColumnDef="client">
-          <th cdk-header-cell *cdkHeaderCellDef="">Cliente</th>
-          <td cdk-cell *cdkCellDef="let sale">{{ sale.client.name }}</td>
+          <th cdk-header-cell *cdkHeaderCellDef="">Id</th>
+          <td cdk-cell *cdkCellDef="let sale">{{ sale.id }}</td>
         </ng-container>
         <ng-container cdkColumnDef="total">
           <th cdk-header-cell *cdkHeaderCellDef="">Total</th>
-          <td cdk-cell *cdkCellDef="let sale">{{ sale.total | currency }}</td>
+          <td cdk-cell *cdkCellDef="let sale">{{ sale.total | currency:'s/ ' }}</td>
         </ng-container>
         <ng-container cdkColumnDef="date">
           <th cdk-header-cell *cdkHeaderCellDef="">Fecha</th>
-          <td cdk-cell *cdkCellDef="let sale">{{ sale.createdAt | date }}</td>
+          <td cdk-cell *cdkCellDef="let sale">{{ sale.createdAt | date:'short' }}</td>
         </ng-container>
         <ng-container cdkColumnDef="user">
           <th cdk-header-cell *cdkHeaderCellDef="">Usuario</th>

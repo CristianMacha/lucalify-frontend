@@ -33,8 +33,8 @@ export class BackofficeComponent {
   public menus = [
     { id: 1, name: 'Descripción general', link: '/overview' },
     { id: 2, name: 'Productos', link: '/products' },
-    { id: 3, name: 'Clientes', link: '/clients' },
-    { id: 4, name: 'Ventas', link: '/sales' },
+    // { id: 3, name: 'Clientes', link: '/clients' },
+    { id: 3, name: 'Ventas', link: '/sales' },
   ];
 
   public handleThemeChange(theme: string): void {

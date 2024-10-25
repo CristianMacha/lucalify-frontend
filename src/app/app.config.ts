@@ -33,6 +33,7 @@ import { ClientEffects } from './backoffice/clients/state/client.effects';
 import { CategoryEffects } from './backoffice/inventory/categories/state/category.effects';
 import { ProductEffects } from './backoffice/inventory/products/state/product.effects';
 import { SaleEffects } from './backoffice/sales/state/sale.effects';
+import { _formSaleReducer, formSaleFeatureKey } from './backoffice/sales/form-sale/state/form-sale.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -44,6 +45,7 @@ export const appConfig: ApplicationConfig = {
     provideState({ name: productFeatureKey, reducer: _productReducer }),
     provideState({ name: clientFeatureKey, reducer: _clientReducer }),
     provideState({ name: saleFeatureKey, reducer: _saleReducer }),
+    provideState({ name: formSaleFeatureKey, reducer: _formSaleReducer }),
     provideEffects([
       ClientEffects,
       CategoryEffects,

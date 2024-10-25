@@ -13,6 +13,7 @@ export interface Payment {
 }
 
 export interface CreatePaymentSale {
+  id: string;
   amount: number;
   note: string;
   paymentDate: Date;

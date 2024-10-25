@@ -355,7 +355,6 @@ export class ModalClientFormComponent implements OnInit {
     const typeDocumentControl = this.clientForm.controls['typeDocumentId'];
     const documentNumber = documentNumberControl.value;
     const typeDocument = typeDocumentControl.value;
-    console.log(documentNumber);
     if (typeDocument == this.codeDocuments.DOC_RUC) {
       this.GetByRuc(documentNumber);
       return;
