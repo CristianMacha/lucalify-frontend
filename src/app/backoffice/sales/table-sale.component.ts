@@ -15,13 +15,17 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
   template: `
     <div class="table-container">
       <table cdk-table [dataSource]="dataSource" class="w-full">
-        <ng-container cdkColumnDef="client">
+        <ng-container cdkColumnDef="id">
           <th cdk-header-cell *cdkHeaderCellDef="">Id</th>
           <td cdk-cell *cdkCellDef="let sale">{{ sale.id }}</td>
         </ng-container>
         <ng-container cdkColumnDef="total">
           <th cdk-header-cell *cdkHeaderCellDef="">Total</th>
           <td cdk-cell *cdkCellDef="let sale">{{ sale.total | currency:'s/ ' }}</td>
+        </ng-container>
+        <ng-container cdkColumnDef="client">
+          <th cdk-header-cell *cdkHeaderCellDef="">Cliente</th>
+          <td cdk-cell *cdkCellDef="let sale">{{ sale.client?.name || '-' }}</td>
         </ng-container>
         <ng-container cdkColumnDef="date">
           <th cdk-header-cell *cdkHeaderCellDef="">Fecha</th>
@@ -44,7 +48,7 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 export class TableSaleComponent {
   private store = inject(Store<AppState>);
 
-  public displayedColumns: string[] = ['client', 'total', 'date', 'user'];
+  public displayedColumns: string[] = ['id', 'total', 'client', 'date', 'user'];
   public dataSource = new TableSaleDataSource();
   public sales$: Observable<Sale[]>;
 

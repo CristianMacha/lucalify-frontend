@@ -10,10 +10,6 @@ import {
 import { selectFormSaleProducts } from './state/form-sale.selector';
 import { AsyncPipe, CurrencyPipe, NgFor } from '@angular/common';
 import { ListProductSaleItemComponent } from './list-product-sale-item.component';
-import { SaleService } from '@services/sale.service';
-import { clearFormSale } from './state/form-sale.actions';
-import { Router } from '@angular/router';
-import { CreateSale } from '@interfaces/sale.interface';
 
 @Component({
   selector: 'app-list-product-sale',
@@ -38,12 +34,7 @@ import { CreateSale } from '@interfaces/sale.interface';
       @if((productSales$ | async)?.length != 0) {
       <div class="text-end px-4 text-xl font-medium">
         <span class="font-normal text-lg text-gray-500">Total: </span>
-        {{ totalPrice | currency:'s/ ' }}
-      </div>
-      <div class="text-end mt-4">
-        <button class="btn btn-primary" (click)="handleCreateSale()">
-          Realizar venta
-        </button>
+        {{ totalPrice | currency : 's/ ' }}
       </div>
       }
     </div>
@@ -51,8 +42,6 @@ import { CreateSale } from '@interfaces/sale.interface';
 })
 export class ListProductSaleComponent implements OnInit {
   private store = inject(Store<AppState>);
-  private saleService = inject(SaleService);
-  private router = inject(Router);
 
   public totalPrice = 0;
   public productSales: ProductSale[] = [];
@@ -74,28 +63,6 @@ export class ListProductSaleComponent implements OnInit {
       this.productSales = products;
       this.getTotalPrice();
     });
-  }
-
-  private createSale(createSale: CreateSale): void {
-    this.saleService.create(createSale).subscribe({
-      next: () => {
-        this.store.dispatch(clearFormSale());
-        this.router.navigate(['/sales']);
-      },
-    });
-  }
-
-  public handleCreateSale(): void {
-    if (this.productSales.length === 0) {
-      return;
-    }
-    const createSale: CreateSale = {
-      products: this.productSales.map((productSale) => ({
-        productId: productSale.product.id,
-        quantity: productSale.quantity,
-      })),
-    };
-    this.createSale(createSale);
   }
 
   public getTotalPrice(): void {

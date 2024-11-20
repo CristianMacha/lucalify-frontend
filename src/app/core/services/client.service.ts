@@ -35,4 +35,8 @@ export class ClientService {
   public update(id: string, updateClient: UpdateClient): Observable<Client> {
     return this.http.put<Client>(`${this.uri}/${id}`, updateClient);
   }
+
+  public search(textSearch: string): Observable<Client[]> {
+    return this.http.get<Client[]>(`${this.uri}/search?value=${textSearch}`);
+  }
 }

@@ -1,0 +1,19 @@
+<div class="relative">
+  @if (clientSelected) {
+  <div>{{clientSelected.name}} | <strong>{{clientSelected.documentNumber}}</strong></div>
+  } @else {
+  <input type="text" placeholder="Buscar cliente" class="w-full" [formControl]="searchClientControl">
+  }
+  @if(clients.length > 0) {
+  <div
+    class="absolute top-[44px] w-full bg-white dark:bg-gray-900 shadow-sm rounded-lg shadow-gray-400 dark:shadow-gray-400 max-h-[400px] overflow-y-auto overflow-x-hidden">
+    @for (client of clients; track client.id) {
+    <div
+      class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 hover:cursor-pointer flex flex-row gap-4 items-center"
+      (click)="selectClient(client)">
+      <div class="flex-1">{{ client.name }}</div>
+    </div>
+    }
+  </div>
+  }
+</div>

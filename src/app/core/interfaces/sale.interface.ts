@@ -26,5 +26,6 @@ export interface FilterSale {
 
 export interface CreateSale {
   products: CreateProductSale[];
+  clientId?: string;
   // payments: CreatePaymentSale[];
 }
