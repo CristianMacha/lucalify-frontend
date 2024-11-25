@@ -25,15 +25,15 @@ import {
   clientFeatureKey,
 } from './backoffice/clients/state/client.reducer';
 import {
-  _saleReducer,
-  saleFeatureKey,
-} from './backoffice/sales/state/sale.reducer';
+  _tradeReducer,
+  tradeFeatureKey,
+} from './backoffice/trades/state/trade.reducer';
 import { provideEffects } from '@ngrx/effects';
 import { ClientEffects } from './backoffice/clients/state/client.effects';
 import { CategoryEffects } from './backoffice/inventory/categories/state/category.effects';
 import { ProductEffects } from './backoffice/inventory/products/state/product.effects';
-import { SaleEffects } from './backoffice/sales/state/sale.effects';
-import { _formSaleReducer, formSaleFeatureKey } from './backoffice/sales/form-sale/state/form-sale.reducer';
+import { TradeEffects } from './backoffice/trades/state/trade.effects';
+import { _formTradeReducer, formTradeFeatureKey } from './backoffice/trades/form-trade/state/form-trade.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -44,13 +44,13 @@ export const appConfig: ApplicationConfig = {
     provideState({ name: categoryFeatureKey, reducer: _categoryReducer }),
     provideState({ name: productFeatureKey, reducer: _productReducer }),
     provideState({ name: clientFeatureKey, reducer: _clientReducer }),
-    provideState({ name: saleFeatureKey, reducer: _saleReducer }),
-    provideState({ name: formSaleFeatureKey, reducer: _formSaleReducer }),
+    provideState({ name: tradeFeatureKey, reducer: _tradeReducer }),
+    provideState({ name: formTradeFeatureKey, reducer: _formTradeReducer }),
     provideEffects([
       ClientEffects,
       CategoryEffects,
       ProductEffects,
-      SaleEffects,
+      TradeEffects,
     ]),
     provideStoreDevtools({
       maxAge: 25,

@@ -1,11 +1,12 @@
 import { Category } from './category.interface';
-import { ProductSale } from './product-sale.interface';
+import { ProductTrade } from './product-trade.interface';
 
 export interface Product {
   id: string;
   name: string;
   description: string;
   price: number;
+  pricePurchase: number;
   stock: number;
   isActive: boolean;
   code: string;
@@ -14,7 +15,7 @@ export interface Product {
   createdAt: Date;
   updatedAt: Date;
   category: Category;
-  productSales: ProductSale[];
+  productTrades: ProductTrade[];
 }
 
 export interface CreateProduct {
@@ -22,6 +23,7 @@ export interface CreateProduct {
   description: string;
   categoryId: string;
   price: number;
+  pricePurchase: number;
   isVariable: boolean;
   stock: number;
   code: string;

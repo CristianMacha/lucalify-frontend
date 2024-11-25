@@ -12,6 +12,8 @@ import { debounceTime, Subscription } from 'rxjs';
 
 import { ProductService } from '@services/product.service';
 import { Product } from '@interfaces/product.interface';
+import { TradesService } from '../trades.service';
+import { TradeType } from '@interfaces/trade.interface';
 
 @Component({
   selector: 'app-search-product',
@@ -36,7 +38,12 @@ import { Product } from '@interfaces/product.interface';
         >
           <div class="flex-1">{{ product.name }}</div>
           <div class="">{{ product.stock }}</div>
-          <div class="">{{ product.price | currency:'s/ ' }}</div>
+          <div class="">
+            {{
+              (tradeType == 'sale' ? product.price : product.pricePurchase)
+                | currency : 's/ '
+            }}
+          </div>
         </div>
         }
       </div>
@@ -48,10 +55,14 @@ export class SearchProductComponent implements OnInit, OnDestroy {
   @Output() public productSelected = new EventEmitter<Product>();
   private subscription = new Subscription();
   private productService = inject(ProductService);
+  private tradesService = inject(TradesService);
+
+  public tradeType: TradeType = TradeType.SALE;
   public searchProductControl = new FormControl('');
   public products: Product[] = [];
 
   ngOnInit(): void {
+    this.tradeType = this.tradesService.getTradeType().tradeType;
     this.searchProductChange();
   }
 

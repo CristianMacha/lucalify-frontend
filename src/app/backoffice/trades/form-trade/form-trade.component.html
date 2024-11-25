@@ -1,7 +1,7 @@
-<app-breadcrumbs [title]="id">
+<app-breadcrumbs [title]="'Nueva ' + tradeTypeTitle.slice(0, -1)">
   <div options>
-    <a [routerLink]="['/sales']" routerLinkActive="router-link-active" class="btn btn-link">
-      Volver a ventas
+    <a [routerLink]="['/' + tradeType + 's']" routerLinkActive="router-link-active" class="btn btn-link">
+      Volver a {{tradeTypeTitle}}
     </a>
   </div>
 </app-breadcrumbs>
@@ -13,16 +13,16 @@
         <div class="flex flex-col gap-4">
           <div>
             <h2 class="mb-6 text-gray-500">Productos</h2>
-            <app-list-product-sale />
+            <app-list-product-trade />
           </div>
           <div>
-            <h2 class="mb-6 text-gray-500">Detalles del cliente</h2>
+            <h2 class="mb-6 text-gray-500">Detalles del cliente/proveedor</h2>
             <app-client-selection />
           </div>
           @if (productsSelected.length > 0) {
           <div class="text-end mt-4">
-            <button class="btn btn-primary" (click)="handleCreateSale()">
-              Realizar venta
+            <button class="btn btn-primary" (click)="handleCreateTrade()">
+              Realizar {{tradeTypeTitle.slice(0, -1)}}
             </button>
           </div>
           }

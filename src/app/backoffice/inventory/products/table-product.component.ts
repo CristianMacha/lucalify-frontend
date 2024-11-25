@@ -97,7 +97,7 @@ export class TableProductActionsComponent {
         </td>
       </ng-container>
       <ng-container cdkColumnDef="price">
-        <th cdk-header-cell *cdkHeaderCellDef>Precio</th>
+        <th cdk-header-cell *cdkHeaderCellDef class="text-end">Precio</th>
         <td cdk-cell *cdkCellDef="let product" class="text-end">
           {{ product.price | currency:'s/ ' }}
         </td>
@@ -107,7 +107,7 @@ export class TableProductActionsComponent {
         <td cdk-cell *cdkCellDef="let product">{{ product.category.name }}</td>
       </ng-container>
       <ng-container cdkColumnDef="quantity">
-        <th cdk-header-cell *cdkHeaderCellDef>Cantidad</th>
+        <th cdk-header-cell *cdkHeaderCellDef class="text-end">Cantidad</th>
         <td cdk-cell *cdkCellDef="let product" class="text-end">
           {{ product.stock }}
         </td>

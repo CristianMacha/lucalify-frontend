@@ -1,7 +1,7 @@
 import { Product } from './product.interface';
-import { Sale } from './sale.interface';
+import { Trade } from './trade.interface';
 
-export interface ProductSale {
+export interface ProductTrade {
   id: string;
   quantity: number;
   price: number;
@@ -10,15 +10,16 @@ export interface ProductSale {
   createdAt: Date;
   updatedAt: Date;
   product: Product;
-  sale?: Sale;
+  trade?: Trade;
 }
 
-export interface CreateProductSale {
+export interface CreateProductTrade {
   productId: string;
   quantity: number;
 }
 
-export interface CreateProductSaleFront {
+export interface CreateProductTradeFront {
   product: Product;
   quantity: number;
+  price: number;
 }

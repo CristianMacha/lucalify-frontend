@@ -1,14 +1,14 @@
-<app-breadcrumbs [title]="'Ventas'">
+<app-breadcrumbs [title]="tradeUrl">
   <div options>
-    <a [routerLink]="['/sales', 'add-edit', 'new']" routerLinkActive="router-link-active"  class="btn btn-primary">
-      Agregar venta
+    <a [routerLink]="['/', tradeType + 's', 'add-edit', 'new']" routerLinkActive="router-link-active"  class="btn btn-primary">
+      Agregar {{tradeUrl}}
     </a>
   </div>
 </app-breadcrumbs>
 <div class="p-4">
   <div class="wrapper">
     <div class="bg-white dark:bg-slate-800 rounded-xl border mt-4 dark:border-gray-500">
-      <app-table-sale />
+      <app-table-trade />
       @if(pagination) {
         <app-pagination [pagination]="pagination" (paginationChange)="handlePaginationChange($event)" />
         }

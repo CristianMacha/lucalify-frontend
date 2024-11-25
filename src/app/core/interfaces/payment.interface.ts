@@ -1,4 +1,4 @@
-import { Sale } from './sale.interface';
+import { Trade } from './trade.interface';
 
 export interface Payment {
   id: string;
@@ -9,10 +9,10 @@ export interface Payment {
   updatedBy: string;
   createdAt: Date;
   updatedAt: Date;
-  sale: Sale;
+  trade: Trade;
 }
 
-export interface CreatePaymentSale {
+export interface CreatePaymentTrade {
   id: string;
   amount: number;
   note: string;

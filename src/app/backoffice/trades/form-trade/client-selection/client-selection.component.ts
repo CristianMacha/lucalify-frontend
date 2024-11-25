@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { ClientService } from '@services/client.service';
 import { debounceTime, Subscription } from 'rxjs';
 import { AppState } from '../../../../app.state';
-import { addClient } from '../state/form-sale.actions';
+import { addClient } from '../state/form-trade.actions';
 import { NgFor, NgIf } from '@angular/common';
 
 @Component({

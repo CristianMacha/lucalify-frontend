@@ -30,6 +30,7 @@ export class ModalProductFormComponent implements OnInit {
     name: new FormControl('', Validators.required),
     description: new FormControl(''),
     price: new FormControl('', Validators.required),
+    pricePurchase: new FormControl('', Validators.required),
     stock: new FormControl(0, Validators.required),
     code: new FormControl('', Validators.required),
     categoryId: new FormControl('', [
@@ -54,12 +55,13 @@ export class ModalProductFormComponent implements OnInit {
   }
 
   private setProductFormValues(): void {
-    const { name, description, price, stock, code, category } =
+    const { name, description, price, stock, code, category, pricePurchase } =
       this.data.product;
     this.productForm.patchValue({
       name,
       description,
       price,
+      pricePurchase,
       stock,
       code,
       categoryId: category.id,

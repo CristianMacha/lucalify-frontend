@@ -26,7 +26,13 @@ export const routes: Routes = [
       },
       {
         path: 'sales',
-        loadChildren: () => import('./sales/sales.routes').then((r) => r.routes),
+        loadChildren: () => import('./trades/trades.routes').then((r) => r.routes),
+        title: 'Ventas',
+      },
+      {
+        path: 'purchases',
+        loadChildren: () => import('./trades/trades.routes').then((r) => r.routes),
+        title: 'Compras',
       }
     ],
   },
