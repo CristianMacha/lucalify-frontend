@@ -6,6 +6,8 @@ import { environment } from '../../../environments/environment';
 import {
   CreateProduct,
   FilterProduct,
+  KardexFilter,
+  KardexResult,
   Product,
   UpdateProduct,
 } from '@interfaces/product.interface';
@@ -42,5 +44,11 @@ export class ProductService {
 
   public search(textSearch: string): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.uri}/search?value=${textSearch}`);
+  }
+
+  public getKardex(kardexFilter: KardexFilter): Observable<KardexResult[]> {
+    const { productCode, startDate, endDate } = kardexFilter;
+    const query = `?startDate=${startDate}&endDate=${endDate}&productCode=${productCode}`;
+    return this.http.get<KardexResult[]>(`${this.uri}/kardex${query}`);
   }
 }

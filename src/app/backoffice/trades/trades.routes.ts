@@ -17,7 +17,7 @@ export const routes: Routes = [
         component: FormTradeComponent,
         title: 'Formulario',
         canDeactivate: [
-          (component: FormTradeComponent) => {
+          () => {
             const result = confirm('¿Estás seguro de que deseas salir?');
             return result;
           },

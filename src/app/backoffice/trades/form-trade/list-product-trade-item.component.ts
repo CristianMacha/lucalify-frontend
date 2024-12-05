@@ -75,12 +75,7 @@ import { TradeType } from '@interfaces/trade.interface';
         />
       </div>
       <div class="min-w-[170px] text-end">
-        {{
-          (tradeType === 'sale'
-            ? productTrade.product.price
-            : productTrade.product.pricePurchase) * productTrade.quantity
-            | currency : 's/ '
-        }}
+        {{ totalPrice | currency : 's/ ' }}
       </div>
     </div>
   `,
@@ -93,16 +88,13 @@ export class ListProductTradeItemComponent implements OnInit, OnChanges {
   public tradeType: TradeType = TradeType.SALE;
   public quantityControl = new FormControl(0);
   public priceControl = new FormControl(0);
+  public totalPrice = 0;
 
   ngOnInit(): void {
     this.tradeType = this.tradesService.getTradeType().tradeType;
 
     this.quantityControl.setValue(this.productTrade.quantity);
-    this.priceControl.setValue(
-      this.tradeType === TradeType.SALE
-        ? this.productTrade.product.price
-        : this.productTrade.product.pricePurchase
-    );
+    this.priceControl.setValue(this.productTrade.price);
 
     this.quantityControl.valueChanges.subscribe((quantity) => {
       this.store.dispatch(
@@ -127,7 +119,12 @@ export class ListProductTradeItemComponent implements OnInit, OnChanges {
     if (changes['productTrade']) {
       this.quantityControl.setValue(this.productTrade.quantity);
       this.priceControl.setValue(this.productTrade.price);
+      this.calculateTotalPrice();
     }
+  }
+
+  private calculateTotalPrice(): void {
+    this.totalPrice = this.productTrade.price * this.productTrade.quantity;
   }
 
   public incrementQuantity(): void {

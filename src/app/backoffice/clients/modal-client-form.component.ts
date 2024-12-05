@@ -11,11 +11,15 @@ import {
   Validators,
 } from '@angular/forms';
 import { TypeDocument } from '@interfaces/type-document.interface';
-import { loadCreateClient, loadUpdateClient } from './state/client.actions';
+import {
+  loadCreateClientSuccess,
+  loadUpdateClientSuccess,
+} from './state/client.actions';
 import { JsonPipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { IdentityService } from '@services/Identity.service';
 import { CODE_DOCUMENTS } from '@consts/identity';
 import { startWith } from 'rxjs';
+import { ClientService } from '@services/client.service';
 
 @Component({
   selector: 'app-modal-client-form',
@@ -225,8 +229,9 @@ export class ModalClientFormComponent implements OnInit {
   private typeDocumentService = inject(TypeDocumentService);
   private store = inject(Store<AppState>);
   private identityService = inject(IdentityService);
+  private clientService = inject(ClientService);
 
-  public dialogRef = inject(DialogRef<boolean>);
+  public dialogRef = inject(DialogRef<Client>);
   public data = inject<{ client: Client }>(DIALOG_DATA);
 
   public typeDocuments: TypeDocument[] = [];
@@ -317,17 +322,23 @@ export class ModalClientFormComponent implements OnInit {
 
   private saveClient(): void {
     const client = this.clientForm.value;
-    this.store.dispatch(loadCreateClient({ createClient: client }));
-    this.dialogRef.close(true);
+    this.clientService.create(client).subscribe({
+      next: (client) => {
+        this.store.dispatch(loadCreateClientSuccess({ client }));
+        this.dialogRef.close(client);
+      },
+    });
   }
 
   private updateClient(): void {
     const clientFormValue = this.clientForm.value;
     const client = this.data.client;
-    this.store.dispatch(
-      loadUpdateClient({ id: client.id, updateClient: clientFormValue })
-    );
-    this.dialogRef.close(true);
+    this.clientService.update(client.id, clientFormValue).subscribe({
+      next: (client) => {
+        this.store.dispatch(loadUpdateClientSuccess({ client }));
+        this.dialogRef.close(client);
+      },
+    });
   }
 
   private GetByDni(documentNumber: string): void {
@@ -378,6 +389,6 @@ export class ModalClientFormComponent implements OnInit {
   }
 
   public onNoClick(): void {
-    this.dialogRef.close(false);
+    this.dialogRef.close();
   }
 }

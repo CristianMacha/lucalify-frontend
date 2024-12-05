@@ -36,3 +36,17 @@ export interface FilterProduct {
   page: number;
   perPage: number;
 }
+
+export interface KardexFilter {
+  productCode?: string;
+  startDate: Date;
+  endDate: Date;
+}
+
+export interface KardexResult {
+  productCode: string;
+  productName: string;
+  salesCount: number;
+  purchaseCount: number;
+  totalStock: number;
+}

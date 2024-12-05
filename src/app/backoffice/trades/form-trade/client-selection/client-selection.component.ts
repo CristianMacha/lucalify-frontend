@@ -7,6 +7,10 @@ import { debounceTime, Subscription } from 'rxjs';
 import { AppState } from '../../../../app.state';
 import { addClient } from '../state/form-trade.actions';
 import { NgFor, NgIf } from '@angular/common';
+import { selectFormTradeClient } from '../state/form-trade.selector';
+import { Dialog } from '@angular/cdk/dialog';
+import { ModalClientFormComponent } from '../../../clients/modal-client-form.component';
+import { DialogPositionStrategy } from '@services/dialog-position-strategy.service';
 
 @Component({
   selector: 'app-client-selection',
@@ -18,7 +22,9 @@ import { NgFor, NgIf } from '@angular/common';
 export class ClientSelectionComponent implements OnInit {
   private subscription = new Subscription();
   private clientService = inject(ClientService);
+  private dialogPositionStrategy = inject(DialogPositionStrategy);
   private store = inject(Store<AppState>);
+  private dialog = inject(Dialog);
 
   public searchClientControl = new FormControl('');
   public clients: Client[] = [];
@@ -26,6 +32,7 @@ export class ClientSelectionComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchClientChange();
+    this.getClientTrade();
   }
 
   private searchClientChange(): void {
@@ -40,6 +47,14 @@ export class ClientSelectionComponent implements OnInit {
           this.getResultSearch(value);
         })
     );
+  }
+
+  private getClientTrade(): void {
+    this.store.select(selectFormTradeClient).subscribe((client) => {
+      this.clientSelected = client;
+      if (!client) return;
+      this.searchClientControl.setValue(client.name, { emitEvent: false });
+    });
   }
 
   private getResultSearch(value: string): void {
@@ -58,5 +73,18 @@ export class ClientSelectionComponent implements OnInit {
     this.clientSelected = client;
     this.clients = [];
     this.searchClientControl.setValue('', { emitEvent: false });
+  }
+
+  public handleAddNewClient(): void {
+    const dialog = this.dialog.open<Client>(ModalClientFormComponent, {
+      width: '600px',
+      positionStrategy: this.dialogPositionStrategy.centerTop(),
+      disableClose: true,
+    });
+
+    dialog.closed.subscribe((client: Client | undefined) => {
+      if (!client) return;
+      this.selectClient(client);
+    });
   }
 }

@@ -1,0 +1,47 @@
+<div class="p-4">
+  <div class="wrapper">
+    <form [formGroup]="kardexFilter" class="flex flex-col md:flex-row gap-2" (submit)="handleFilter()">
+      <input type="text" placeholder="Codigo de producto" formControlName="productCode" class="flex-1">
+      <input type="date" formControlName="startDate">
+      <input type="date" formControlName="endDate">
+      <button type="submit" class="btn btn-primary">Generar reporte</button>
+    </form>
+    <div class="bg-white dark:bg-slate-800 rounded-xl border mt-4 dark:border-gray-500">
+      <div class="table-container">
+        <table cdk-table [dataSource]="dataSource" class="w-full">
+          <ng-container cdkColumnDef="productCode">
+            <th cdk-header-cell *cdkHeaderCellDef="">CODIGO</th>
+            <td cdk-cell *cdkCellDef="let kardex">{{ kardex.productCode }}</td>
+          </ng-container>
+          <ng-container cdkColumnDef="productName">
+            <th cdk-header-cell *cdkHeaderCellDef="">PRODUCTO</th>
+            <td cdk-cell *cdkCellDef="let kardex">
+              <span class="whitespace-nowrap">{{ kardex.productName }}</span>
+            </td>
+          </ng-container>
+          <ng-container cdkColumnDef="salesCount">
+            <th cdk-header-cell *cdkHeaderCellDef="">SALIDAS</th>
+            <td cdk-cell *cdkCellDef="let kardex">
+              {{ kardex.salesCount }}
+            </td>
+          </ng-container>
+          <ng-container cdkColumnDef="purchaseCount">
+            <th cdk-header-cell *cdkHeaderCellDef="">ENTRADAS</th>
+            <td cdk-cell *cdkCellDef="let kardex">
+              {{ kardex.purchaseCount }}
+            </td>
+          </ng-container>
+          <ng-container cdkColumnDef="totalStock">
+            <th cdk-header-cell *cdkHeaderCellDef="">TOTAL</th>
+            <td cdk-cell *cdkCellDef="let kardex">{{ kardex.totalStock }}</td>
+          </ng-container>
+          <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
+          <tr cdk-row *cdkRowDef="let row; columns: displayedColumns; let i = index" [class.bg-tr]="i % 2 !== 0"></tr>
+          <tr *cdkNoDataRow>
+            <td class="mat-cell" colspan="8">No data</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

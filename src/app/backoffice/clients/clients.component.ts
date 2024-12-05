@@ -13,7 +13,7 @@ import { loadFilteredClients } from './state/client.actions';
 import { FilterClientComponent } from './filter-client.component';
 import { FilterCategoryComponent } from '../inventory/categories/filter-category.component';
 import { PaginationInterface } from '@interfaces/pagination.interface';
-import { FilterClient } from '@interfaces/client.interface';
+import { Client, FilterClient } from '@interfaces/client.interface';
 import { PaginationComponent } from '../../shared/pagination.component';
 import { DialogPositionStrategy } from '@services/dialog-position-strategy.service';
 import { ModalClientFormComponent } from './modal-client-form.component';
@@ -49,7 +49,7 @@ export class ClientsComponent implements OnInit {
   }
 
   public handleOpenModal(): void {
-    this.dialog.open<boolean>(ModalClientFormComponent, {
+    this.dialog.open<Client>(ModalClientFormComponent, {
       width: '600px',
       positionStrategy: this.dialogPositionStrategy.centerTop(),
       disableClose: true,

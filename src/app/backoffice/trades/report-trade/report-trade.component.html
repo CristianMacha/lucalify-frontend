@@ -1,0 +1,7 @@
+<div class="p-4 rounded-md bg-white">
+  <form [formGroup]="reportForm" class="flex flex-col gap-2" (submit)="generateReport()">
+    <input type="date" formControlName="startDate">
+    <input type="date" formControlName="endDate">
+    <button type="submit" class="btn btn-primary">Generar reporte</button>
+  </form>
+</div>

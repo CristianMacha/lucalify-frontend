@@ -15,6 +15,7 @@ import {
   removeProductTrade,
   updatePriceProductTrade,
   updateQuantityProductTrade,
+  setFormTrade,
 } from './form-trade.actions';
 import { TradeType } from '@interfaces/trade.interface';
 
@@ -42,7 +43,8 @@ export const _formTradeReducer = createReducer(
       const newProductTrade: ProductTrade = {
         product,
         quantity: 1,
-        price: tradeType === TradeType.SALE ? product.price : product.pricePurchase,
+        price:
+          tradeType === TradeType.SALE ? product.price : product.pricePurchase,
         createdBy: '',
         createdAt: new Date(),
         id: '',
@@ -51,10 +53,7 @@ export const _formTradeReducer = createReducer(
       };
       return {
         ...state,
-        productTrades: [
-          ...state.productTrades,
-          newProductTrade
-        ],
+        productTrades: [...state.productTrades, newProductTrade],
       };
     } else {
       const productTrades = state.productTrades.map(
@@ -125,5 +124,20 @@ export const _formTradeReducer = createReducer(
   on(removePayment, (state, { id }) => ({
     ...state,
     payments: state.payments.filter((payment) => payment.id !== id),
+  })),
+  on(setFormTrade, (state, { trade }) => ({
+    ...state,
+    productTrades: trade.productTrades.map((productTrade) => ({
+      product: productTrade.product,
+      quantity: productTrade.quantity,
+      price: productTrade.price,
+      createdBy: productTrade.createdBy,
+      createdAt: productTrade.createdAt,
+      id: productTrade.id,
+      updatedAt: productTrade.updatedAt,
+      updatedBy: productTrade.updatedBy,
+    })),
+    client: trade.client,
+    payments: trade.payments,
   }))
 );

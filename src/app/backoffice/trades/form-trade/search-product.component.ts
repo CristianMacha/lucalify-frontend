@@ -37,7 +37,7 @@ import { TradeType } from '@interfaces/trade.interface';
           (click)="selectProduct(product)"
         >
           <div class="flex-1">{{ product.name }}</div>
-          <div class="">{{ product.stock }}</div>
+          <div class="">stock: {{ product.stock }}</div>
           <div class="">
             {{
               (tradeType == 'sale' ? product.price : product.pricePurchase)

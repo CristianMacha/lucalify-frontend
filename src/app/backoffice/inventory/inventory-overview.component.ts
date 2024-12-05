@@ -26,13 +26,6 @@ import { BreadcrumbsComponent } from '../../shared/breadcrumbs.component';
             class="flex items-center px-2 rounded-xl"
             >Categorias</a
           >
-          <a
-            [routerLink]="['/products/packages']"
-            routerLinkActive="active-menu-breadcrumb"
-            [routerLinkActiveOptions]="{ exact: true }"
-            class="flex items-center px-2 rounded-xl"
-            >Paquetes</a
-          >
         </div>
       </div>
     </app-breadcrumbs>

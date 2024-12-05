@@ -1,5 +1,5 @@
 import { ApplicationConfig, isDevMode, Provider } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { routes } from './app.routes';
 import {
@@ -33,11 +33,14 @@ import { ClientEffects } from './backoffice/clients/state/client.effects';
 import { CategoryEffects } from './backoffice/inventory/categories/state/category.effects';
 import { ProductEffects } from './backoffice/inventory/products/state/product.effects';
 import { TradeEffects } from './backoffice/trades/state/trade.effects';
-import { _formTradeReducer, formTradeFeatureKey } from './backoffice/trades/form-trade/state/form-trade.reducer';
+import {
+  _formTradeReducer,
+  formTradeFeatureKey,
+} from './backoffice/trades/form-trade/state/form-trade.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
+    provideRouter(routes, withComponentInputBinding()),
     provideHttpClient(withFetch(), withInterceptors([tokenInterceptor])),
     provideStore(),
     provideState({ name: authFeatureKey, reducer: _authReducer }),

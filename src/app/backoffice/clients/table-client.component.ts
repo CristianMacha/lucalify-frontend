@@ -92,7 +92,7 @@ export class TableClientComponent {
   }
 
   public handleOpenModal(client: Client): void {
-    this.dialog.open<boolean>(ModalClientFormComponent, {
+    this.dialog.open<Client>(ModalClientFormComponent, {
       width: '600px',
       data: { client },
       positionStrategy: this.dialogPositionStrategy.centerTop(),

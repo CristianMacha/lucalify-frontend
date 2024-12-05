@@ -23,3 +23,9 @@ export interface CreateProductTradeFront {
   quantity: number;
   price: number;
 }
+
+export interface FilterProductTrade {
+  textSearch?: string;
+  startDate: Date;
+  endDate: Date;
+}

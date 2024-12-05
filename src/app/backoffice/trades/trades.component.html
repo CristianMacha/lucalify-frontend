@@ -1,6 +1,8 @@
 <app-breadcrumbs [title]="tradeUrl">
-  <div options>
-    <a [routerLink]="['/', tradeType + 's', 'add-edit', 'new']" routerLinkActive="router-link-active"  class="btn btn-primary">
+  <div options class="flex flex-row gap-2">
+    <button class="btn" (click)="openReport()">Generar reporte</button>
+    <a [routerLink]="['/', tradeType + 's', 'add-edit', 'new']" routerLinkActive="router-link-active"
+      class="btn btn-primary">
       Agregar {{tradeUrl}}
     </a>
   </div>
@@ -10,7 +12,8 @@
     <div class="bg-white dark:bg-slate-800 rounded-xl border mt-4 dark:border-gray-500">
       <app-table-trade />
       @if(pagination) {
-        <app-pagination [pagination]="pagination" (paginationChange)="handlePaginationChange($event)" />
-        }
+      <app-pagination [pagination]="pagination" (paginationChange)="handlePaginationChange($event)" />
+      }
+    </div>
   </div>
 </div>

@@ -1,7 +1,7 @@
 import { Client } from "@interfaces/client.interface";
 import { CreatePaymentTrade } from "@interfaces/payment.interface";
 import { Product } from "@interfaces/product.interface";
-import { TradeType } from "@interfaces/trade.interface";
+import { Trade, TradeType } from "@interfaces/trade.interface";
 import { createAction, props } from "@ngrx/store";
 
 export const addProductTrade = createAction('[Form Trade] Add Product Trade', props<{ product: Product, tradeType: TradeType }>());
@@ -15,3 +15,5 @@ export const clearFormTrade = createAction('[Form Trade] Clear Form Trade');
 
 export const addPayment = createAction('[Form Trade] Add Payment', props<{ payment: CreatePaymentTrade }>());
 export const removePayment = createAction('[Form Trade] Remove Payment', props<{ id: string }>());
+
+export const setFormTrade = createAction('[Form Trade] Set Form Trade', props<{ trade: Trade }>());

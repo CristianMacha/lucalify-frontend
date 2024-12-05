@@ -1,21 +1,16 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 
 import { AppState } from '../../../app.state';
-import {
-  CreateProductTradeFront,
-  ProductTrade,
-} from '@interfaces/product-trade.interface';
+import { ProductTrade } from '@interfaces/product-trade.interface';
 import { selectFormTradeProducts } from './state/form-trade.selector';
-import { AsyncPipe, CurrencyPipe, NgFor } from '@angular/common';
+import { CurrencyPipe, NgFor } from '@angular/common';
 import { ListProductTradeItemComponent } from './list-product-trade-item.component';
-import { TradesService } from '../trades.service';
 
 @Component({
   selector: 'app-list-product-trade',
   standalone: true,
-  imports: [NgFor, AsyncPipe, ListProductTradeItemComponent, CurrencyPipe],
+  imports: [NgFor, ListProductTradeItemComponent, CurrencyPipe],
   template: `
     <div class="flex flex-col gap-2">
       <div class="flex flex-row gap-4 text-sm font-medium px-4 text-gray-500">
@@ -25,14 +20,13 @@ import { TradesService } from '../trades.service';
         <div class="min-w-[170px] text-end">TOTAL</div>
       </div>
       <div class="flex flex-col gap-1">
-        @for(productTrade of productTrades$ | async; track productTrade.product.id)
-        {
+        @for(productTrade of productTrades; track productTrade.product.id) {
         <app-product-trade-item [productTrade]="productTrade" />
-        } @if((productTrades$ | async)?.length == 0){
+        } @if(productTrades.length == 0){
         <div class="text-center text-gray-500">No hay productos agregados</div>
         }
       </div>
-      @if((productTrades$ | async)?.length != 0) {
+      @if(productTrades.length != 0) {
       <div class="text-end px-4 text-xl font-medium">
         <span class="font-normal text-lg text-gray-500">Total: </span>
         {{ totalPrice | currency : 's/ ' }}
@@ -43,7 +37,6 @@ import { TradesService } from '../trades.service';
 })
 export class ListProductTradeComponent implements OnInit {
   private store = inject(Store<AppState>);
-  private tradesService = inject(TradesService);
 
   public totalPrice = 0;
   public productTrades: ProductTrade[] = [];
@@ -54,20 +47,15 @@ export class ListProductTradeComponent implements OnInit {
     'price',
     'options',
   ];
-  public productTrades$: Observable<CreateProductTradeFront[]>;
-
-  constructor() {
-    this.productTrades$ = this.store.select(selectFormTradeProducts);
-  }
 
   ngOnInit(): void {
     this.store.select(selectFormTradeProducts).subscribe((products) => {
       this.productTrades = products;
-      this.getTotalPrice();
+      this.calculateTotalPrice();
     });
   }
 
-  public getTotalPrice(): void {
+  private calculateTotalPrice(): void {
     this.totalPrice = this.productTrades.reduce(
       (acc, productTrade) => acc + productTrade.price * productTrade.quantity,
       0

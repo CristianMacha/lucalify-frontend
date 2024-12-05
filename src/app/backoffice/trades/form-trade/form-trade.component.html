@@ -19,11 +19,19 @@
             <h2 class="mb-6 text-gray-500">Detalles del cliente/proveedor</h2>
             <app-client-selection />
           </div>
-          @if (productsSelected.length > 0) {
-          <div class="text-end mt-4">
-            <button class="btn btn-primary" (click)="handleCreateTrade()">
-              Realizar {{tradeTypeTitle.slice(0, -1)}}
-            </button>
+          @if (productTradesSelected.length > 0) {
+          <div class="flex gap-2 mt-4 justify-end">
+            @if(editMode) {
+            <div>
+              <button class="btn btn-secondary" (click)="getTicket()">Imprimir</button>
+            </div>
+            }@else {
+            <div>
+              <button class="btn btn-primary" (click)="handleCreateTrade()">
+                Realizar {{tradeTypeTitle.slice(0, -1)}}
+              </button>
+            </div>
+            }
           </div>
           }
         </div>

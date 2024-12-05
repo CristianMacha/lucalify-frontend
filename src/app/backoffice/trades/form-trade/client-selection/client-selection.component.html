@@ -2,7 +2,12 @@
   @if (clientSelected) {
   <div>{{clientSelected.name}} | <strong>{{clientSelected.documentNumber}}</strong></div>
   } @else {
-  <input type="text" placeholder="Buscar cliente" class="w-full" [formControl]="searchClientControl">
+  <div class="flex gap-2">
+    <input type="text" placeholder="Buscar cliente" class="w-full flex-1" [formControl]="searchClientControl">
+    <div>
+      <button class="btn btn-primary" (click)="handleAddNewClient()">Agregar</button>
+    </div>
+  </div>
   }
   @if(clients.length > 0) {
   <div

@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 import { AppState } from '../../app.state';
 import { PaginationInterface } from '@interfaces/pagination.interface';
@@ -15,6 +15,8 @@ import {
 import { FilterTrade, TradeType } from '@interfaces/trade.interface';
 import { loadFilteredTrade } from './state/trade.actions';
 import { TradesService } from './trades.service';
+import { Dialog } from '@angular/cdk/dialog';
+import { ReportTradeComponent } from './report-trade/report-trade.component';
 
 @Component({
   selector: 'app-trades-overview',
@@ -31,6 +33,7 @@ import { TradesService } from './trades.service';
 export class TradesComponent implements OnInit {
   private store = inject(Store<AppState>);
   private tradesService = inject(TradesService);
+  private dialog = inject(Dialog);
 
   private filterTrade!: FilterTrade;
   public pagination: PaginationInterface | null = null;
@@ -43,7 +46,6 @@ export class TradesComponent implements OnInit {
     this.store.select(selectPaginationTrade).subscribe((pagination) => {
       this.pagination = pagination;
     });
-
   }
 
   private setTradeType(): void {
@@ -70,5 +72,11 @@ export class TradesComponent implements OnInit {
         },
       })
     );
+  }
+
+  public openReport(): void {
+    this.dialog.open(ReportTradeComponent, {
+      width: '400px',
+    })
   }
 }

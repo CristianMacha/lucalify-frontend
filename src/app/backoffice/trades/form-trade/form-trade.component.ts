@@ -6,7 +6,11 @@ import { Product } from '@interfaces/product.interface';
 import { ListProductTradeComponent } from './list-product-trade.component';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../app.state';
-import { addProductTrade, clearFormTrade } from './state/form-trade.actions';
+import {
+  addProductTrade,
+  clearFormTrade,
+  setFormTrade,
+} from './state/form-trade.actions';
 import { ClientSelectionComponent } from './client-selection/client-selection.component';
 import { Client } from '@interfaces/client.interface';
 import {
@@ -33,6 +37,7 @@ import { TradesService } from '../trades.service';
   templateUrl: './form-trade.component.html',
 })
 export class FormTradeComponent implements OnInit {
+  @Input() id!: string;
   private store = inject(Store<AppState>);
   private tradeService = inject(TradeService);
   private tradesService = inject(TradesService);
@@ -40,8 +45,9 @@ export class FormTradeComponent implements OnInit {
 
   public tradeType: TradeType = TradeType.SALE;
   public tradeTypeTitle: string = 'ventas';
-  public productsSelected: ProductTrade[] = [];
+  public productTradesSelected: ProductTrade[] = [];
   public clientSelected: Client | null = null;
+  public editMode: boolean = false;
 
   ngOnInit(): void {
     this.store.dispatch(clearFormTrade());
@@ -49,11 +55,12 @@ export class FormTradeComponent implements OnInit {
     this.tradeTypeTitle = this.tradesService.getTradeType().title;
     this.getProductsSelected();
     this.getClientSelected();
+    this.setEditMode();
   }
 
   private getProductsSelected(): void {
-    this.store.select(selectFormTradeProducts).subscribe((products) => {
-      this.productsSelected = products;
+    this.store.select(selectFormTradeProducts).subscribe((productTrades) => {
+      this.productTradesSelected = productTrades;
     });
   }
 
@@ -65,26 +72,56 @@ export class FormTradeComponent implements OnInit {
 
   private createTrade(createTrade: CreateTrade): void {
     this.tradeService.create(createTrade).subscribe({
-      next: () => {
+      next: (trade) => {
         this.store.dispatch(clearFormTrade());
-        this.router.navigate([this.tradeType + 's']);
+        this.router.navigate([this.tradeType + 's', 'add-edit', trade.id]);
+        this.id = trade.id;
+        this.editMode = true;
+        this.getTrade();
       },
     });
   }
 
+  private setEditMode(): void {
+    const id = this.id;
+    if (id !== 'new') {
+      this.editMode = true;
+      this.getTrade();
+    }
+  }
+
+  private getTrade(): void {
+    this.tradeService.getById(this.id).subscribe({
+      next: (trade) => this.store.dispatch(setFormTrade({ trade })),
+    });
+  }
+
   public productSubimitted(product: Product): void {
-    this.store.dispatch(addProductTrade({ product, tradeType: this.tradeType }));
+    this.store.dispatch(
+      addProductTrade({ product, tradeType: this.tradeType })
+    );
   }
 
   public handleCreateTrade(): void {
     const createTrade: CreateTrade = {
-      products: this.productsSelected.map((productTrade) => ({
+      productTrades: this.productTradesSelected.map((productTrade) => ({
         productId: productTrade.product.id,
         quantity: productTrade.quantity,
+        price: productTrade.price,
       })),
       clientId: this.clientSelected?.id,
       type: this.tradeType,
     };
     this.createTrade(createTrade);
+  }
+
+  public getTicket(): void {
+    this.tradeService.getTicket(this.id).subscribe({
+      next: (response) => {
+        const blob = new Blob([response], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        window.open(url);
+      },
+    });
   }
 }

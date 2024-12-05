@@ -36,6 +36,7 @@ export class BackofficeComponent {
     { id: 3, name: 'Clientes', link: '/clients' },
     { id: 4, name: 'Ventas', link: '/sales' },
     { id: 5, name: 'Compras', link: '/purchases' },
+    { id: 6, name: 'Reportes', link: '/reports' },
   ];
 
   public handleThemeChange(theme: string): void {

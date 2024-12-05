@@ -1,5 +1,5 @@
 import { Client } from './client.interface';
-import { CreatePaymentTrade, Payment } from './payment.interface';
+import { Payment } from './payment.interface';
 import { CreateProductTrade, ProductTrade } from './product-trade.interface';
 
 export enum TradeType {
@@ -32,8 +32,14 @@ export interface FilterTrade {
 }
 
 export interface CreateTrade {
-  products: CreateProductTrade[];
+  productTrades: CreateProductTrade[];
   clientId?: string;
   type: TradeType;
   // payments: CreatePaymentTrade[];
+}
+
+export interface TradeReport {
+  readonly startDate: Date;
+  readonly endDate: Date;
+  readonly tradeType: TradeType;
 }

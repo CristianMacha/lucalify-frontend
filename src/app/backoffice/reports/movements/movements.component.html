@@ -1,0 +1,59 @@
+<div class="p-4">
+  <div class="wrapper">
+    <form [formGroup]="filterForm" class="flex flex-col md:flex-row gap-2" (submit)="handleFilter()">
+      <input type="text" placeholder="Nombre/codigo Producto" formControlName="textSearch" class="flex-1">
+      <input type="date" formControlName="startDate">
+      <input type="date" formControlName="endDate">
+      <button type="submit" class="btn btn-primary">Generar reporte</button>
+    </form>
+    <div class="bg-white dark:bg-slate-800 rounded-xl border mt-4 dark:border-gray-500">
+      <div class="table-container">
+        <table cdk-table [dataSource]="dataSource" class="w-full">
+          <ng-container cdkColumnDef="date">
+            <th cdk-header-cell *cdkHeaderCellDef="">Fecha</th>
+            <td cdk-cell *cdkCellDef="let movement">{{ movement.createdAt | date:'short' }}</td>
+          </ng-container>
+          <ng-container cdkColumnDef="trade">
+            <th cdk-header-cell *cdkHeaderCellDef="">Venta/Compra</th>
+            <td cdk-cell *cdkCellDef="let movement">
+              <span class="whitespace-nowrap">{{ movement.trade.type }}</span>
+            </td>
+          </ng-container>
+          <ng-container cdkColumnDef="product">
+            <th cdk-header-cell *cdkHeaderCellDef="">Producto</th>
+            <td cdk-cell *cdkCellDef="let movement">
+              {{ movement.product.name }}
+            </td>
+          </ng-container>
+          <ng-container cdkColumnDef="code">
+            <th cdk-header-cell *cdkHeaderCellDef="">Codigo</th>
+            <td cdk-cell *cdkCellDef="let movement">
+              {{ movement.product.code }}
+            </td>
+          </ng-container>
+          <ng-container cdkColumnDef="category">
+            <th cdk-header-cell *cdkHeaderCellDef="">Categoria</th>
+            <td cdk-cell *cdkCellDef="let movement">{{ movement.product.category.name }}</td>
+          </ng-container>
+          <ng-container cdkColumnDef="quantity">
+            <th cdk-header-cell *cdkHeaderCellDef="">Cantidad</th>
+            <td cdk-cell *cdkCellDef="let movement">{{ movement.quantity }}</td>
+          </ng-container>
+          <ng-container cdkColumnDef="price">
+            <th cdk-header-cell *cdkHeaderCellDef="">Categoria</th>
+            <td cdk-cell *cdkCellDef="let movement">{{ movement.price | currency }}</td>
+          </ng-container>
+          <ng-container cdkColumnDef="total">
+            <th cdk-header-cell *cdkHeaderCellDef="">Total</th>
+            <td cdk-cell *cdkCellDef="let movement">{{ (movement.price * movement.quantity) | currency }}</td>
+          </ng-container>
+          <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
+          <tr cdk-row *cdkRowDef="let row; columns: displayedColumns; let i = index" [class.bg-tr]="i % 2 !== 0"></tr>
+          <tr *cdkNoDataRow>
+            <td class="mat-cell" colspan="8">No data</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
