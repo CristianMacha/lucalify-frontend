@@ -13,7 +13,7 @@ export class AuthEffects {
       exhaustMap(({ email, password }) =>
         this.authService.login({ email, password }).pipe(
           map((response) => {
-            this.router.navigate(['/products']);
+            this.router.navigate(['/overview']);
             localStorage.setItem('token', response.token);
             return authSetUser(response.user);
           }),

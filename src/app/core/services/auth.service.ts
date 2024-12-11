@@ -4,10 +4,14 @@ import { Store } from '@ngrx/store';
 import { catchError, map, Observable, of } from 'rxjs';
 
 import { User } from '@interfaces/user.interface';
-import { SignIn, SignInResponse } from '@interfaces/auth.interface';
+import {
+  AuthMeResponse,
+  SignIn,
+  SignInResponse,
+} from '@interfaces/auth.interface';
 import { AuthState } from '../../auth/state/auth.reducer';
 import { environment } from '../../../environments/environment';
-import { authSetUser } from '../../auth/state/auth.actions';
+import { authSetAccess, authSetUser } from '../../auth/state/auth.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -24,9 +28,10 @@ export class AuthService {
   }
 
   public getMe(): Observable<boolean> {
-    return this.http.get<User>(`${this.uri}/me`).pipe(
-      map((user: User) => {
-        this.store.dispatch(authSetUser(user));
+    return this.http.get<AuthMeResponse>(`${this.uri}/me`).pipe(
+      map((resp: AuthMeResponse) => {
+        this.store.dispatch(authSetUser(resp.user));
+        this.store.dispatch(authSetAccess({ access: resp.access }));
         return true;
       }),
       catchError(() => of(false))

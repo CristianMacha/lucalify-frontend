@@ -7,6 +7,9 @@ export * from './client.interface';
 export * from './payment.interface';
 export * from './product-trade.interface';
 export * from './trade.interface';
+export * from './access.interface';
+export * from './role.interface';
+export * from './role-access.interface';
 
 export * from './pagination.interface';
 export * from './identity.interface';

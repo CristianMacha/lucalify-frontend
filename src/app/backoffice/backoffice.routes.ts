@@ -3,11 +3,13 @@ import { BackofficeOverviewComponent } from './backoffice-overview.component';
 import { BackofficeComponent } from './backoffice.component';
 import { ClientsComponent } from './clients/clients.component';
 import { _clientReducer } from './clients/state/client.reducer';
+import { accessGuard } from '@guards/access.guard';
 
 export const routes: Routes = [
   {
     path: '',
     component: BackofficeComponent,
+    canActivate: [accessGuard],
     children: [
       {
         path: 'overview',
